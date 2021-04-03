@@ -12,11 +12,14 @@ class Portfolio:
 
     def evaluate(self, currency):
         total = functools.reduce(operator.add, 
-          map(lambda m: self.__convert(m, currency), self.moneys), 0) # <1>
+          map(lambda m: self.__convert(m, currency), self.moneys), 0)
         return Money(total, currency)
 
     def __convert(self, aMoney, aCurrency):
+        exchangeRates = {'EUR->USD': 1.2, 'USD->KRW': 1100}
+        # exchangeRates = {}
         if aMoney.currency == aCurrency:
             return aMoney.amount
         else:
-            return aMoney.amount * self._eur_to_usd
+            key = aMoney.currency + '->' + aCurrency
+            return aMoney.amount * exchangeRates[key]
