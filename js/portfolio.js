@@ -9,22 +9,34 @@ class Portfolio {
     }
 
     evaluate(currency) {
-        var total = this.moneys.reduce((sum, money) => {
-            return sum + this.convert(money, currency);
-        }, 0);
-        return new Money(total, currency);
+        let failures = [];
+        let total = this.moneys.reduce( (sum, money) => {
+            let convertedAmount = this.convert(money, currency);
+            if (convertedAmount == undefined) {
+                failures.push(money.currency + "->" + currency);
+                return sum;
+            }
+            return sum + convertedAmount;
+          }, 0);
+        if (failures.length == 0) {
+            return new Money(total, currency);
+        }
+        throw new Error("Missing exchange rate(s):[" + failures.join() + "]");
     }
 
     convert(money, currency) {
-        var eurToUsd = 1.2;
-        var exchangeRates = new Map(); // <1>
+        var exchangeRates = new Map();
         exchangeRates.set("EUR->USD", 1.2);
         exchangeRates.set("USD->KRW", 1100);
         if (money.currency == currency) {
             return money.amount;
         }
         let key = money.currency + "->" + currency;
-        return money.amount * exchangeRates.get(key);
+        let rate = exchangeRates.get(key);
+        if (rate == undefined) {
+            return undefined;
+        }
+        return money.amount * rate;
     }
 }
 
