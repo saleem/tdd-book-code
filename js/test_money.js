@@ -23,8 +23,21 @@ class MoneyTest {
     assert.deepStrictEqual(portfolio.evaluate("USD"), fifteenDollars);
   }
 
+  testAdditionOfDollarsAndEuros() {
+    var fiveDollars = new Money(5, "USD");
+    var tenEuros = new Money(10, "EUR");
+    var portfolio = new Portfolio();
+    portfolio.add(fiveDollars, tenEuros);
+    var expectedValue = new Money(17, "USD");
+    assert.deepStrictEqual(portfolio.evaluate("USD"), expectedValue);
+  }
+
   getAllTestMethods() {
-    var testMethods = ['testMultiplication', 'testDivision', 'testAddition'];
+    let moneyPrototype = MoneyTest.prototype;
+    let allProps = Object.getOwnPropertyNames(moneyPrototype);
+    let testMethods = allProps.filter(p => {
+      return typeof moneyPrototype[p] === 'function' && p.startsWith("test"); // <3>
+    });
     return testMethods;
   }
 
