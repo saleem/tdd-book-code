@@ -1,4 +1,5 @@
 const Money = require('./money');
+const Bank = require('./bank');
 
 class Portfolio {
     constructor() {
@@ -8,35 +9,24 @@ class Portfolio {
         this.moneys = this.moneys.concat(Array.prototype.slice.call(arguments));
     }
 
-    evaluate(currency) {
+    evaluate(bank, currency) {
         let failures = [];
+        let sum = 0;
         let total = this.moneys.reduce( (sum, money) => {
-            let convertedAmount = this.convert(money, currency);
-            if (convertedAmount == undefined) {
-                failures.push(money.currency + "->" + currency);
+            try {
+                var convertedMoney = bank.convert(money, currency);
+            }
+            catch (error) {
+                failures.push(error.message);
                 return sum;
             }
-            return sum + convertedAmount;
+            return sum + convertedMoney.amount;
           }, 0);
+
         if (failures.length == 0) {
             return new Money(total, currency);
         }
         throw new Error("Missing exchange rate(s):[" + failures.join() + "]");
-    }
-
-    convert(money, currency) {
-        var exchangeRates = new Map();
-        exchangeRates.set("EUR->USD", 1.2);
-        exchangeRates.set("USD->KRW", 1100);
-        if (money.currency == currency) {
-            return money.amount;
-        }
-        let key = money.currency + "->" + currency;
-        let rate = exchangeRates.get(key);
-        if (rate == undefined) {
-            return undefined;
-        }
-        return money.amount * rate;
     }
 }
 
