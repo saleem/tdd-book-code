@@ -59,11 +59,13 @@ class MoneyTest {
     assert.throws(function() {portfolio.evaluate(bank, "Kalganid")}, expectedError);
   }
 
-  testConversion() {
-    let bank = new Bank();
-    bank.addExchangeRate("EUR", "USD", 1.2);
+  testConversionWithDifferentRatesBetweenTwoCurrencies() {
+    this.bank.addExchangeRate("EUR", "KRW", 1300);
     let tenEuros = new Money(10, "EUR");
-    assert.deepStrictEqual(bank.convert(tenEuros, "USD"), new Money(12, "USD"));
+    assert.deepStrictEqual(this.bank.convert(tenEuros, "KRW"), new Money(13000, "KRW"));
+
+    this.bank.addExchangeRate("EUR", "KRW", 1344);
+    assert.deepStrictEqual(this.bank.convert(tenEuros, "KRW"), new Money(13440, "KRW"));
   }
 
   testConversionWithMissingExchangeRate() {
