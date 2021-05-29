@@ -16,9 +16,9 @@ class MoneyTest {
     assert.deepStrictEqual(tenEuros.times(2), twentyEuros);
   }
   testDivision() {
-    let originalMoney = new Money(4002, "KRW")
-    let expectedMoneyAfterDivision = new Money(1000.5, "KRW")
-    assert.deepStrictEqual(originalMoney.divide(4), expectedMoneyAfterDivision)
+    let originalMoney = new Money(4002, "KRW");
+    let expectedMoneyAfterDivision = new Money(1000.5, "KRW");
+    assert.deepStrictEqual(originalMoney.divide(4), expectedMoneyAfterDivision);
   }
 
   testAddition() {
@@ -56,7 +56,7 @@ class MoneyTest {
     portfolio.add(oneDollar, oneEuro, oneWon);
     let expectedError = new Error("Missing exchange rate(s):[USD->Kalganid,EUR->Kalganid,KRW->Kalganid]");
     let bank = this.bank;
-    assert.throws(function() {portfolio.evaluate(bank, "Kalganid")}, expectedError);
+    assert.throws(function() {portfolio.evaluate(bank, "Kalganid");}, expectedError);
   }
 
   testConversionWithDifferentRatesBetweenTwoCurrencies() {
@@ -72,7 +72,7 @@ class MoneyTest {
     let bank = new Bank();
     let tenEuros = new Money(10, "EUR");
     let expectedError = new Error("EUR->Kalganid");
-    assert.throws(function () { bank.convert(tenEuros, "Kalganid") }, expectedError);
+    assert.throws(function () { bank.convert(tenEuros, "Kalganid");}, expectedError);
   }
 
   getAllTestMethods() {

@@ -1,6 +1,5 @@
-import functools
-import operator
 from money import Money
+
 
 class Portfolio:
     def __init__(self):
@@ -15,7 +14,7 @@ class Portfolio:
         failures = []
         for m in self.moneys:
             try:
-                total += bank.convert(m, currency).amount # <1>
+                total += bank.convert(m, currency).amount
             except Exception as ex:
                 failures.append(ex)
 

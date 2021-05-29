@@ -15,12 +15,12 @@ class Portfolio {
         let total = this.moneys.reduce( (sum, money) => {
             try {
                 var convertedMoney = bank.convert(money, currency);
+                return sum + convertedMoney.amount;
             }
             catch (error) {
                 failures.push(error.message);
                 return sum;
             }
-            return sum + convertedMoney.amount;
           }, 0);
 
         if (failures.length == 0) {

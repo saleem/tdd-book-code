@@ -1,5 +1,6 @@
 from money import Money
 
+
 class Bank:
     def __init__(self):
         self.exchangeRates = {}
