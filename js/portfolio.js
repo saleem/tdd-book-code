@@ -1,5 +1,4 @@
 const Money = require('./money');
-const Bank = require('./bank');
 
 class Portfolio {
     constructor() {
@@ -11,10 +10,9 @@ class Portfolio {
 
     evaluate(bank, currency) {
         let failures = [];
-        let sum = 0;
         let total = this.moneys.reduce( (sum, money) => {
             try {
-                var convertedMoney = bank.convert(money, currency);
+                let convertedMoney = bank.convert(money, currency);
                 return sum + convertedMoney.amount;
             }
             catch (error) {

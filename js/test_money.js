@@ -31,11 +31,11 @@ class MoneyTest {
   }
 
   testAdditionOfDollarsAndEuros() {
-    var fiveDollars = new Money(5, "USD");
-    var tenEuros = new Money(10, "EUR");
-    var portfolio = new Portfolio();
+    let fiveDollars = new Money(5, "USD");
+    let tenEuros = new Money(10, "EUR");
+    let portfolio = new Portfolio();
     portfolio.add(fiveDollars, tenEuros);
-    var expectedValue = new Money(17, "USD");
+    let expectedValue = new Money(17, "USD");
     assert.deepStrictEqual(portfolio.evaluate(this.bank, "USD"), expectedValue);
   }
 
@@ -88,7 +88,7 @@ class MoneyTest {
     let testMethods = this.getAllTestMethods();
     testMethods.forEach(m => {
       console.log("Running: %s()", m);
-      var method = Reflect.get(this, m);
+      let method = Reflect.get(this, m);
       try {
         Reflect.apply(method, this, []);
       } catch (e) {

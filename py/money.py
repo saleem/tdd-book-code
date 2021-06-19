@@ -13,4 +13,4 @@ class Money:
         return self.amount == other.amount and self.currency == other.currency
 
     def __str__(self):
-        return "%s %0.2f" % (self.currency, self.amount)
+        return f"{self.currency} {self.amount:0.2f}"

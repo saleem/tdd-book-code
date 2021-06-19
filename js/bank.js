@@ -11,7 +11,7 @@ class Bank {
     }
 
     convert(money, currency) {
-        if (money.currency == currency) {
+        if (money.currency === currency) {
             return new Money(money.amount, money.currency);
         }
         let key = money.currency + "->" + currency;

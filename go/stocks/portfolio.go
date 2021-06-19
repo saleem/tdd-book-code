@@ -20,7 +20,7 @@ func (p Portfolio) Evaluate(bank Bank, currency string) (*Money, error) {
 		}
 	}
 	if len(failedConversions) == 0 {
-		totalMoney := Money{amount: total, currency: currency}
+		totalMoney := NewMoney(total, currency)
 		return &totalMoney, nil
 	}
 	failures := "["
