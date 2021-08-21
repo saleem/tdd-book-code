@@ -1,7 +1,7 @@
 const assert = require('assert');
 const Money = require('./money');
 const Portfolio = require('./portfolio');
-const Bank = require('./bank'); 
+const Bank = require('./bank');
 
 class MoneyTest {
   constructor() {
@@ -55,8 +55,7 @@ class MoneyTest {
     let portfolio = new Portfolio();
     portfolio.add(oneDollar, oneEuro, oneWon);
     let expectedError = new Error("Missing exchange rate(s):[USD->Kalganid,EUR->Kalganid,KRW->Kalganid]");
-    let bank = this.bank;
-    assert.throws(function() {portfolio.evaluate(bank, "Kalganid");}, expectedError);
+    assert.throws(() => portfolio.evaluate(this.bank, "Kalganid"), expectedError);
   }
 
   testConversionWithDifferentRatesBetweenTwoCurrencies() {
@@ -72,7 +71,7 @@ class MoneyTest {
     let bank = new Bank();
     let tenEuros = new Money(10, "EUR");
     let expectedError = new Error("EUR->Kalganid");
-    assert.throws(function () { bank.convert(tenEuros, "Kalganid");}, expectedError);
+    assert.throws(function () { bank.convert(tenEuros, "Kalganid"); }, expectedError);
   }
 
   getAllTestMethods() {
