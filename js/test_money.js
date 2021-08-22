@@ -10,6 +10,6 @@ class Dollar {
     }
 }
 
-fiver = new Dollar(5);
-tenner = fiver.times(2);
+let fiver = new Dollar(5);
+let tenner = fiver.times(2);
 assert.strictEqual(tenner.amount, 10);
