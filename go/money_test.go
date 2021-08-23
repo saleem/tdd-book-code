@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestMultiplicationInEuros(t *testing.T) {
+func TestMultiplication(t *testing.T) {
 	tenEuros := s.NewMoney(10, "EUR")
 	actualResult := tenEuros.Times(2)
 	expectedResult := s.NewMoney(20, "EUR")
@@ -32,6 +32,21 @@ func TestAddition(t *testing.T) {
 	portfolioInDollars = portfolio.Evaluate("USD")
 
 	assertEqual(t, fifteenDollars, portfolioInDollars)
+}
+
+func TestAdditionOfDollarsAndEuros(t *testing.T) {
+	var portfolio s.Portfolio
+
+	fiveDollars := s.NewMoney(5, "USD")
+	tenEuros := s.NewMoney(10, "EUR")
+
+	portfolio = portfolio.Add(fiveDollars)
+	portfolio = portfolio.Add(tenEuros)
+
+	expectedValue := s.NewMoney(17, "USD")
+	actualValue := portfolio.Evaluate("USD")
+
+	assertEqual(t, expectedValue, actualValue)
 }
 
 func assertEqual(t *testing.T, expected s.Money, actual s.Money) {
