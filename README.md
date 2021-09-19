@@ -26,3 +26,6 @@ node js/test_money.js
 ```
 python3 py/test_money.py
 ```
+# How to get the book
+
+The book is available at [Amazon](https://www.amazon.com/Learning-Test-Driven-Development-Polyglot-Uncluttered/dp/1098106474/ref=sr_1_3?) and [O'Reilly](https://learning.oreilly.com/library/view/learning-test-driven-development/9781098106461/).

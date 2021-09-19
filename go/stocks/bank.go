@@ -6,12 +6,14 @@ type Bank struct {
 	exchangeRates map[string]float64
 }
 
-func (b Bank) AddExchangeRate(currencyFrom string, currencyTo string, rate float64) {
+func (b Bank) AddExchangeRate(currencyFrom string, currencyTo string,
+	rate float64) {
 	key := currencyFrom + "->" + currencyTo
 	b.exchangeRates[key] = rate
 }
 
-func (b Bank) Convert(money Money, currencyTo string) (convertedMoney *Money, err error) {
+func (b Bank) Convert(money Money, currencyTo string) (convertedMoney *Money,
+	err error) {
 	var result Money
 	if money.currency == currencyTo {
 		result = NewMoney(money.amount, money.currency)
