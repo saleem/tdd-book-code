@@ -11,6 +11,14 @@ class Money {
     divide(divisor) {
         return new Money(this.amount / divisor, this.currency);
     }
+
+    add(money) {
+        if (money.currency !== this.currency) {
+            throw new Error("Cannot add " + money.currency + " to " + this.currency);
+        }
+        return new Money(this.amount + money.amount, this.currency);
+    }
+
 }
 
 module.exports = Money;

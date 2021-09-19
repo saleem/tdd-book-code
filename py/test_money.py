@@ -65,16 +65,27 @@ class TestMoney(unittest.TestCase):
 
     def testConversionWithDifferentRatesBetweenTwoCurrencies(self):
         tenEuros = Money(10, "EUR")
-        self.assertEqual(self.bank.convert(tenEuros, "USD"), Money(12, "USD"))
+        result, missingKey = self.bank.convert(tenEuros, "USD")
+        self.assertEqual(result, Money(12, "USD"))
+        self.assertIsNone(missingKey)
 
         self.bank.addExchangeRate("EUR", "USD", 1.3)
-        self.assertEqual(self.bank.convert(tenEuros, "USD"), Money(13, "USD"))
+        result, missingKey = self.bank.convert(tenEuros, "USD")
+        self.assertEqual(result, Money(13, "USD"))
+        self.assertIsNone(missingKey)
 
     def testConversionWithMissingExchangeRate(self):
         bank = Bank()
         tenEuros = Money(10, "EUR")
-        with self.assertRaisesRegex(Exception, "EUR->Kalganid"):
-            bank.convert(tenEuros, "Kalganid")
+        result, missingKey = self.bank.convert(tenEuros, "Kalganid")
+        self.assertIsNone(result)
+        self.assertEqual(missingKey, "EUR->Kalganid")
+
+    def testAddMoneysDirectly(self):
+        self.assertEqual(Money(15, "USD"), Money(5, "USD") + Money(10, "USD"))
+        self.assertEqual(Money(15, "USD"), Money(10, "USD") + Money(5, "USD"))
+        self.assertEqual(None, Money(5, "USD") + Money(10, "EUR"))
+        self.assertEqual(None, Money(5, "USD") + None)
 
 
 if __name__ == "__main__":
