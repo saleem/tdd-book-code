@@ -27,7 +27,7 @@ func TestDivision(t *testing.T) {
 
 func assertEqual(t *testing.T, expected Money, actual Money) {
 	if expected != actual {
-		t.Errorf("Expected  [%+v] Got: [%+v]", expected, actual)
+		t.Errorf("Expected %+v Got %+v", expected, actual)
 	}
 }
 
