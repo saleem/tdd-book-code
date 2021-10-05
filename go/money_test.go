@@ -84,6 +84,6 @@ func TestAdditionWithMultipleMissingExchangeRates(t *testing.T) {
 
 func assertEqual(t *testing.T, expected interface{}, actual interface{}) {
 	if expected != actual {
-		t.Errorf("Expected  [%+v] Got: [%+v]", expected, actual)
+		t.Errorf("Expected %+v Got %+v", expected, actual)
 	}
 }
