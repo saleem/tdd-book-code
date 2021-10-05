@@ -119,12 +119,12 @@ func TestConversionWithMissingExchangeRate(t *testing.T) {
 
 func assertNil(t *testing.T, actual interface{}) {
 	if actual != nil && !reflect.ValueOf(actual).IsNil() {
-		t.Errorf("Expected to be nil, found: [%+v]", actual)
+		t.Errorf("Expected to be nil, found %+v", actual)
 	}
 }
 
 func assertEqual(t *testing.T, expected interface{}, actual interface{}) {
 	if expected != actual {
-		t.Errorf("Expected  [%+v] Got: [%+v]", expected, actual)
+		t.Errorf("Expected %+v Got %+v", expected, actual)
 	}
 }
