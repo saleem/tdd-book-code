@@ -51,6 +51,6 @@ func TestAdditionOfDollarsAndEuros(t *testing.T) {
 
 func assertEqual(t *testing.T, expected s.Money, actual s.Money) {
 	if expected != actual {
-		t.Errorf("Expected  [%+v] Got: [%+v]", expected, actual)
+		t.Errorf("Expected %+v Got %+v", expected, actual)
 	}
 }
