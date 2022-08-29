@@ -2,6 +2,12 @@ name: JavaScript CI
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      requester:
+        description: 'Whoever requested this CI run'
+        required: true
+        default: 'saleem'
 jobs:
   build:
     name: Build
